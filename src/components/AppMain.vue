@@ -22,7 +22,10 @@ export default {
     <section class="photos" v-if="state.photos">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                <div class="col" v-for="photo in state.photos.data">
+                <div class="col" v-if="state.photos.data == 0">
+                    <h5 class="alert alert-warning" role="alert">There aren't photos for this search</h5>
+                </div>
+                <div class="col" v-else v-for="photo in state.photos.data">
                     <div class="card">
                         <div v-if="photo.image">
                             <img class="card-img-top" style="height:400px;"
@@ -80,7 +83,10 @@ export default {
 
                 </div>
             </div>
-            <nav aria-label="Page navigation" class="mt-3">
+            <nav v-if="state.photos.data == 0">
+                <span class="badge text-bg-warning">Try another one</span>
+            </nav>
+            <nav aria-label="Page navigation" class="mt-3" v-else>
                 <ul class="pagination">
                     <li class="page-item" :class="{ 'disabled': !link.url, 'active': link.active }"
                         v-for="link in state.photos.links">
