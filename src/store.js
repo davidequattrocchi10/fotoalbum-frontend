@@ -36,12 +36,6 @@ export const state = reactive({
         this.callApi(url);
 
     },
-    search() {
-        const url = this.base_api_url + this.photos_endpoint + `?search=${this.search_photo}`;
-        console.log(url);
-        this.callApi(url);
-
-    },
     callApi(url) {
         axios
             .get(url)
