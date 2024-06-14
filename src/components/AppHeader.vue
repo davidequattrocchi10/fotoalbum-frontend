@@ -12,28 +12,10 @@ export default {
             loading: false
         }
     },
-    mounted() {
-        const url = state.base_api_url + state.categories_endpoint;
-        console.log(url);
-        this.fetchCategories(url);
-
-    },
     methods: {
-        fetchCategories(url) {
-            axios
-                .get(url)
-                .then(response => {
-                    state.categories = response.data.results;
-                    console.log(state.categories)
-
-                })
-                .catch(errors => {
-                    console.error(errors);
-                })
-        },
         submitMessage() {
             this.loading = true;
-            // create teh payload for the post request
+            // create the payload for the post request
             const payload = {
                 name: state.name,
                 address: state.address,
@@ -62,10 +44,6 @@ export default {
                 .catch(errors => {
                     console.log(errors);
                 })
-
-
-            // handle the response
-
         }
 
     }
@@ -155,19 +133,7 @@ export default {
                     </div>
                 </div>
             </div>
-            <form @submit.prevent="state.filterPhotos()" class="mt-4">
-                <div class="input-group mb-3">
-                    <input type="search" class="form-control" placeholder="search..." v-model="state.search_photo">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search fa-lg fa-fw"></i>
-                    </button>
-                </div>
-            </form>
 
-            <select v-model="state.selectedCategory" @change="state.filterPhotos">
-                <option value="">All category</option>
-                <option v-for="category in state.categories" :value="category.id">{{ category.name }}</option>
-            </select>
 
         </div>
     </div>

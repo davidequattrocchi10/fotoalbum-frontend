@@ -1,8 +1,12 @@
 <script>
 import { state } from '../store.js';
+import AppSearch from './AppSearch.vue';
 
 export default {
     name: 'AppMain',
+    components: {
+        AppSearch
+    },
     data() {
         return {
             state
@@ -19,6 +23,9 @@ export default {
 </script>
 
 <template>
+
+    <AppSearch></AppSearch>
+
     <section class="photos" v-if="state.photos">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
