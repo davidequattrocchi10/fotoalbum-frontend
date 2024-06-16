@@ -1,11 +1,13 @@
 <script>
 import { state } from '../store.js';
+import AppLoader from './AppLoader.vue';
 import AppSearch from './AppSearch.vue';
 
 export default {
     name: 'AppMain',
     components: {
-        AppSearch
+        AppSearch,
+        AppLoader
     },
     data() {
         return {
@@ -111,6 +113,7 @@ export default {
 
 
     </section>
+    <AppLoader v-else></AppLoader>
 
 </template>
 

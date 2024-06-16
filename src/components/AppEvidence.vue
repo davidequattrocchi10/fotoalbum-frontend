@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import AppLoader from './AppLoader.vue'
 import { state } from '../store.js';
 
 export default {
@@ -7,6 +8,9 @@ export default {
         return {
             state
         }
+    },
+    components: {
+        AppLoader
     },
     mounted() {
         const url = state.base_api_url + state.evidence_endpoint;
@@ -57,6 +61,7 @@ export default {
             </div>
         </div>
     </section>
+    <AppLoader v-else></AppLoader>
 </template>
 
 
