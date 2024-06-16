@@ -121,7 +121,7 @@ export default {
 
 
 
-    <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="bg-light rounded-3">
         <div class="container py-5">
             <h1 class="display-5 fw-bold">Capture the World</h1>
             <div class="row">

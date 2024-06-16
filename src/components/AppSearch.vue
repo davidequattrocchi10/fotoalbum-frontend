@@ -35,7 +35,7 @@ export default {
 
 
 <template>
-    <div class="bg-light rounded-3 my-3">
+    <div class="bg-light rounded-3 mb-3">
         <div class="container py-5">
             <div class="row align-items-baseline">
                 <div class="col-9">
