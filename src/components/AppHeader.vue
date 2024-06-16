@@ -44,6 +44,11 @@ export default {
                 .catch(errors => {
                     console.log(errors);
                 })
+        },
+        resetMessage() {
+            this.success = false;
+            this.errors = false;
+
         }
 
     }
@@ -63,7 +68,8 @@ export default {
             <h5 class="offcanvas-title" id="staticBackdropLabel">
                 Get in Touch!
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button @click="resetMessage()" type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div>

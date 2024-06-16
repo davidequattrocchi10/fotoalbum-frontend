@@ -30,7 +30,7 @@ export default {
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                 <div class="col" v-if="state.photos.data == 0">
-                    <h5 class="alert alert-warning" role="alert">There aren't photos for this search</h5>
+                    <h5 class="alert alert-warning my-2" role="alert">There aren't photos for this search</h5>
                 </div>
                 <div class="col" v-else v-for="photo in state.photos.data">
                     <div class="card">
@@ -91,7 +91,7 @@ export default {
                 </div>
             </div>
             <nav v-if="state.photos.data == 0">
-                <span class="badge text-bg-warning">Try another one</span>
+                <span class="badge text-bg-warning mb-5 p-3">Try another one</span>
             </nav>
             <nav aria-label="Page navigation" class="mt-3" v-else>
                 <ul class="pagination">
