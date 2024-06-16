@@ -41,23 +41,28 @@ export default {
         },
         jumbotron() {
             setTimeout(() => {
-                let header = document.getElementById('jumbotronEvidence');
-                let carousel = document.getElementById('evidenceCarousel');
-                let activeItem = carousel.querySelector('.carousel-item.active img');
+                const header = document.getElementById('jumbotronEvidence');
+                const carousel = document.getElementById('evidenceCarousel');
+                const activeItem = carousel.querySelector('.carousel-item.active img');
+                // console.log(activeItem.currentSrc)
                 if (activeItem) {
                     header.style.backgroundImage = 'url(' + activeItem.currentSrc + ')';
                 }
-            }, 200);
+            }, 300);
         },
         changeImage() {
-            let header = document.getElementById('jumbotronEvidence');
-            console.log(header.style)
-            let carousel = document.getElementById('evidenceCarousel');
-            let activeItem = carousel.querySelector('.carousel-item.active img');
-            console.log(activeItem.currentSrc)
-            if (activeItem) {
-                header.style.backgroundImage = 'url(' + activeItem.currentSrc + ')';
-            }
+            const header = document.getElementById('jumbotronEvidence');
+            console.log(header.style.backgroundImage)
+            const carouselElement = document.getElementById('evidenceCarousel');
+
+            carouselElement.addEventListener('slid.bs.carousel', () => {
+                const activeItem = carouselElement.querySelector('.carousel-item.active');
+                const imgElement = activeItem.querySelector('img');
+                if (imgElement) {
+                    header.style.backgroundImage = 'url(' + imgElement.src + ')';
+                }
+            });
+
 
 
         }
@@ -67,28 +72,30 @@ export default {
 
 <template>
     <section class="evidence" v-if="state.evidence">
-        <div id="jumbotronEvidence" class="jumbotron rounded-3 pb-5">
-            <div class="overlay"></div>
-            <div class="container-over container py-5 text-center">
-                <div id="evidenceCarousel" class="carousel slide">
-                    <div class="carousel-inner" style="width: 70%; height:500px; margin:auto;">
-                        <div class="carousel-item " :class="{ active: index === 0 }"
-                            v-for="(main, index) in state.evidence">
-                            <div v-if="main.image">
-                                <img :src="main.image.startsWith('https://') ? main.image : state.base_api_url + '/storage/' + main.image"
-                                    class="d-block w-100" style="width: 200%; height:500px;" alt="">
+        <div id="jumbotronEvidence" class="jumbotron rounded-3">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="overlay"></div>
+                <div class="container-over container">
+                    <div id="evidenceCarousel" class="carousel slide">
+                        <div class="carousel-inner" style="width: 70%;   margin:auto;">
+                            <div class="carousel-item" :class="{ active: index === 0 }"
+                                v-for="(main, index) in state.evidence">
+                                <div v-if="main.image">
+                                    <img :src="main.image.startsWith('https://') ? main.image : state.base_api_url + '/storage/' + main.image"
+                                        class="d-block w-100" style="width: 200%;" alt="">
+                                </div>
                             </div>
+                            <button class="carousel-control-prev bg-light " type="button"
+                                data-bs-target="#evidenceCarousel" @click="changeImage()" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next bg-light" type="button"
+                                data-bs-target="#evidenceCarousel" @click="changeImage()" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <button class="carousel-control-prev bg-light " type="button" data-bs-target="#evidenceCarousel"
-                            @click="changeImage()" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next bg-light" type="button" data-bs-target="#evidenceCarousel"
-                            @click="changeImage()" data-bs-slide="next">
-                            <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -101,11 +108,9 @@ export default {
 <style scoped>
 .jumbotron {
     position: relative;
-    height: 600px;
     width: 100%;
     background-size: cover;
     background-position: center;
-    color: white;
 }
 
 .overlay {
