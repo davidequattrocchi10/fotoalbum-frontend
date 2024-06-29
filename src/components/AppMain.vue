@@ -37,7 +37,7 @@ export default {
                 <div class="col" v-else v-for="photo in state.photos.data">
                     <div class="card">
                         <div v-if="photo.image">
-                            <img class="card-img-top" style="height:400px;"
+                            <img class="card-img-top" style="height:400px; object-fit: cover;"
                                 :src="photo.image.startsWith('https://') ? photo.image : state.base_api_url + '/storage/' + photo.image"
                                 alt="">
                         </div>
@@ -72,7 +72,7 @@ export default {
                                         <div class="modal-body text-center">
                                             <div v-if="photo.image">
                                                 <img :src="photo.image.startsWith('https://') ? photo.image : state.base_api_url + '/storage/' + photo.image"
-                                                    alt="" style="max-width: 100%; height: 600px; object-fit: cover;">
+                                                    alt="" style="height:400px; object-fit: cover;">
                                             </div>
                                             <div v-else>
                                                 <p>Image not available</p>
